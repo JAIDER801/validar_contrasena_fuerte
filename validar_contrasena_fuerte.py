@@ -13,7 +13,7 @@ def continuar_programa():
         return False
 
 def verificar_contraseña(contraseña):
-    if not 6 <= len(contraseña) <= 12:
+    if len(contraseña) < 6 or len(contraseña) > 12:
         return False
 
     numeros = 0
@@ -33,7 +33,7 @@ def verificar_contraseña(contraseña):
         elif caracter in "#$!%&@/":
             caracteres_especiales += 1
 
-    return numeros >= 2 and mayusculas != 0 and minusculas > 3 and caracteres_especiales != 0
+    return numeros, mayusculas ,minusculas, caracteres_especiales
 
 while True:
     print("\n--- Reglas de Validación ---")
@@ -47,7 +47,11 @@ while True:
 
     elementos_vacios(contraseña_ingresada)
 
-    print(f"\n{verificar_contraseña(contraseña_ingresada)}")
+    validacion = verificar_contraseña(contraseña_ingresada)
+    if validacion != 0:
+        print("\nContraseña valida.")
+    else:
+        print("\nContraseña invalida.")
 
     if not continuar_programa():
         break
